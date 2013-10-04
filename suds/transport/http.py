@@ -18,6 +18,7 @@
 Contains classes for basic HTTP transport implementations.
 """
 
+import urllib
 import urllib2 as u2
 import base64
 import socket
@@ -65,6 +66,7 @@ class HttpTransport(Transport):
 
     def send(self, request):
         result = None
+        request.url = urllib.quote(request.url, safe=":/")        
         url = request.url
         msg = request.message
         headers = request.headers
